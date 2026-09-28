@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import { createSeed } from "./seed";
 import type { EnergyState, Feedback, Load } from "./types";
 import { api, backendUrl } from "./api";
@@ -21,11 +21,12 @@ function subscribe(l: () => void) {
 }
 
 export function useEnergy<T>(selector: (s: EnergyState) => T): T {
-  return useSyncExternalStore(
-    subscribe,
-    () => selector(get()),
-    () => selector((serverSnapshot ??= createSeed())),
-  );
+  const ref = useRef<{ src: EnergyState | null; val: T }>({ src: null, val: undefined as T });
+  const pick = (src: EnergyState) => {
+    if (ref.current.src !== src) ref.current = { src, val: selector(src) };
+    return ref.current.val;
+  };
+  return useSyncExternalStore(subscribe, () => pick(get()), () => pick((serverSnapshot ??= createSeed())));
 }
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
