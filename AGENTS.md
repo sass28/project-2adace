@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Energy state lives in a single external store (src/lib/energy/store.ts) with memoized selectors; demo simulation runs when VITE_BACKEND_URL is unset — keeps realtime updates cheap and backend swappable.
