@@ -11,10 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConsoleRouteImport } from './routes/_console'
+import { Route as ConsoleAlertsRouteImport } from './routes/_console.alerts'
+import { Route as ConsoleAnalyticsRouteImport } from './routes/_console.analytics'
+import { Route as ConsoleDevicesRouteImport } from './routes/_console.devices'
+import { Route as ConsoleFeedbackRouteImport } from './routes/_console.feedback'
 import { Route as ConsoleLiveRouteImport } from './routes/_console.live'
 import { Route as ConsoleLoadsRouteImport } from './routes/_console.loads'
+import { Route as ConsoleModelsRouteImport } from './routes/_console.models'
 import { Route as ConsoleOverviewRouteImport } from './routes/_console.overview'
 import { Route as ConsolePrioritiesRouteImport } from './routes/_console.priorities'
+import { Route as ConsoleSettingsRouteImport } from './routes/_console.settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,6 +31,26 @@ const ConsoleRoute = ConsoleRouteImport.update({
   id: '/_console',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsoleAlertsRoute = ConsoleAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleAnalyticsRoute = ConsoleAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleDevicesRoute = ConsoleDevicesRouteImport.update({
+  id: '/devices',
+  path: '/devices',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleFeedbackRoute = ConsoleFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => ConsoleRoute,
+} as any)
 const ConsoleLiveRoute = ConsoleLiveRouteImport.update({
   id: '/live',
   path: '/live',
@@ -33,6 +59,11 @@ const ConsoleLiveRoute = ConsoleLiveRouteImport.update({
 const ConsoleLoadsRoute = ConsoleLoadsRouteImport.update({
   id: '/loads',
   path: '/loads',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleModelsRoute = ConsoleModelsRouteImport.update({
+  id: '/models',
+  path: '/models',
   getParentRoute: () => ConsoleRoute,
 } as any)
 const ConsoleOverviewRoute = ConsoleOverviewRouteImport.update({
@@ -45,43 +76,94 @@ const ConsolePrioritiesRoute = ConsolePrioritiesRouteImport.update({
   path: '/priorities',
   getParentRoute: () => ConsoleRoute,
 } as any)
+const ConsoleSettingsRoute = ConsoleSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ConsoleRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alerts': typeof ConsoleAlertsRoute
+  '/analytics': typeof ConsoleAnalyticsRoute
+  '/devices': typeof ConsoleDevicesRoute
+  '/feedback': typeof ConsoleFeedbackRoute
   '/live': typeof ConsoleLiveRoute
   '/loads': typeof ConsoleLoadsRoute
+  '/models': typeof ConsoleModelsRoute
   '/overview': typeof ConsoleOverviewRoute
   '/priorities': typeof ConsolePrioritiesRoute
+  '/settings': typeof ConsoleSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alerts': typeof ConsoleAlertsRoute
+  '/analytics': typeof ConsoleAnalyticsRoute
+  '/devices': typeof ConsoleDevicesRoute
+  '/feedback': typeof ConsoleFeedbackRoute
   '/live': typeof ConsoleLiveRoute
   '/loads': typeof ConsoleLoadsRoute
+  '/models': typeof ConsoleModelsRoute
   '/overview': typeof ConsoleOverviewRoute
   '/priorities': typeof ConsolePrioritiesRoute
+  '/settings': typeof ConsoleSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_console': typeof ConsoleRouteWithChildren
+  '/_console/alerts': typeof ConsoleAlertsRoute
+  '/_console/analytics': typeof ConsoleAnalyticsRoute
+  '/_console/devices': typeof ConsoleDevicesRoute
+  '/_console/feedback': typeof ConsoleFeedbackRoute
   '/_console/live': typeof ConsoleLiveRoute
   '/_console/loads': typeof ConsoleLoadsRoute
+  '/_console/models': typeof ConsoleModelsRoute
   '/_console/overview': typeof ConsoleOverviewRoute
   '/_console/priorities': typeof ConsolePrioritiesRoute
+  '/_console/settings': typeof ConsoleSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/live' | '/loads' | '/overview' | '/priorities'
+  fullPaths:
+    | '/'
+    | '/alerts'
+    | '/analytics'
+    | '/devices'
+    | '/feedback'
+    | '/live'
+    | '/loads'
+    | '/models'
+    | '/overview'
+    | '/priorities'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/live' | '/loads' | '/overview' | '/priorities'
+  to:
+    | '/'
+    | '/alerts'
+    | '/analytics'
+    | '/devices'
+    | '/feedback'
+    | '/live'
+    | '/loads'
+    | '/models'
+    | '/overview'
+    | '/priorities'
+    | '/settings'
   id:
     | '__root__'
     | '/'
     | '/_console'
+    | '/_console/alerts'
+    | '/_console/analytics'
+    | '/_console/devices'
+    | '/_console/feedback'
     | '/_console/live'
     | '/_console/loads'
+    | '/_console/models'
     | '/_console/overview'
     | '/_console/priorities'
+    | '/_console/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,6 +187,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_console/alerts': {
+      id: '/_console/alerts'
+      path: '/alerts'
+      fullPath: '/alerts'
+      preLoaderRoute: typeof ConsoleAlertsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/analytics': {
+      id: '/_console/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof ConsoleAnalyticsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/devices': {
+      id: '/_console/devices'
+      path: '/devices'
+      fullPath: '/devices'
+      preLoaderRoute: typeof ConsoleDevicesRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/feedback': {
+      id: '/_console/feedback'
+      path: '/feedback'
+      fullPath: '/feedback'
+      preLoaderRoute: typeof ConsoleFeedbackRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
     '/_console/live': {
       id: '/_console/live'
       path: '/live'
@@ -117,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/loads'
       fullPath: '/loads'
       preLoaderRoute: typeof ConsoleLoadsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/models': {
+      id: '/_console/models'
+      path: '/models'
+      fullPath: '/models'
+      preLoaderRoute: typeof ConsoleModelsRouteImport
       parentRoute: typeof ConsoleRoute
     }
     '/_console/overview': {
@@ -133,21 +250,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsolePrioritiesRouteImport
       parentRoute: typeof ConsoleRoute
     }
+    '/_console/settings': {
+      id: '/_console/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ConsoleSettingsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
   }
 }
 
 interface ConsoleRouteChildren {
+  ConsoleAlertsRoute: typeof ConsoleAlertsRoute
+  ConsoleAnalyticsRoute: typeof ConsoleAnalyticsRoute
+  ConsoleDevicesRoute: typeof ConsoleDevicesRoute
+  ConsoleFeedbackRoute: typeof ConsoleFeedbackRoute
   ConsoleLiveRoute: typeof ConsoleLiveRoute
   ConsoleLoadsRoute: typeof ConsoleLoadsRoute
+  ConsoleModelsRoute: typeof ConsoleModelsRoute
   ConsoleOverviewRoute: typeof ConsoleOverviewRoute
   ConsolePrioritiesRoute: typeof ConsolePrioritiesRoute
+  ConsoleSettingsRoute: typeof ConsoleSettingsRoute
 }
 
 const ConsoleRouteChildren: ConsoleRouteChildren = {
+  ConsoleAlertsRoute: ConsoleAlertsRoute,
+  ConsoleAnalyticsRoute: ConsoleAnalyticsRoute,
+  ConsoleDevicesRoute: ConsoleDevicesRoute,
+  ConsoleFeedbackRoute: ConsoleFeedbackRoute,
   ConsoleLiveRoute: ConsoleLiveRoute,
   ConsoleLoadsRoute: ConsoleLoadsRoute,
+  ConsoleModelsRoute: ConsoleModelsRoute,
   ConsoleOverviewRoute: ConsoleOverviewRoute,
   ConsolePrioritiesRoute: ConsolePrioritiesRoute,
+  ConsoleSettingsRoute: ConsoleSettingsRoute,
 }
 
 const ConsoleRouteWithChildren =
