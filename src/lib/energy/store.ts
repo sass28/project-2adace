@@ -234,9 +234,9 @@ export function triggerRetrain() {
   set((s) => ({ ...s, model: { ...s.model, state: "RETRAINING", retrainLog: [{ t: Date.now(), msg: `Retraining started · ${s.model.feedbackSinceTrain} new samples` }, ...s.model.retrainLog] } }));
   setTimeout(() => {
     set((s) => {
-      const [maj, min, patch] = s.model.active.replace("v", "").split(".").map(Number);
+      const [maj = 1, min = 0, patch = 0] = s.model.active.replace("v", "").split(".").map(Number);
       const version = `v${maj}.${min}.${patch + 1}`;
-      const acc = +(s.model.versions[0].accuracy + Math.random() * 0.8).toFixed(1);
+      const acc = +((s.model.versions[0]?.accuracy ?? 90) + Math.random() * 0.8).toFixed(1);
       return {
         ...s,
         model: {
@@ -244,7 +244,7 @@ export function triggerRetrain() {
           state: "IDLE",
           active: version,
           feedbackSinceTrain: 0,
-          versions: [{ version, trainedAt: Date.now(), accuracy: acc, samples: s.model.versions[0].samples + s.model.feedbackSinceTrain, active: true, note: "Incremental retrain from feedback" }, ...s.model.versions.map((v) => ({ ...v, active: false }))],
+          versions: [{ version, trainedAt: Date.now(), accuracy: acc, samples: (s.model.versions[0]?.samples ?? 0) + s.model.feedbackSinceTrain, active: true, note: "Incremental retrain from feedback" }, ...s.model.versions.map((v) => ({ ...v, active: false }))],
           retrainLog: [{ t: Date.now(), msg: `${version} promoted · accuracy ${acc}%` }, ...s.model.retrainLog],
         },
       };

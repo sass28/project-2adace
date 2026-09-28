@@ -68,9 +68,9 @@ export interface Feedback {
   loadId: string;
   loadName: string;
   action: "Keep ON" | "Allow OFF" | "Turn ON (temp)" | "Turn OFF (temp)" | "Wrong decision";
-  durationMin?: number;
+  durationMin?: number | undefined;
   status: "PENDING" | "ACKNOWLEDGED" | "APPLIED" | "REJECTED BY ESP32";
-  result?: string;
+  result?: string | undefined;
 }
 
 export interface Device {

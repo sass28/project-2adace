@@ -1,7 +1,7 @@
 // Thin REST client for the Nexora backend. URL comes from VITE_BACKEND_URL.
 // No device secrets live in the frontend; the backend authenticates the user session.
 export function backendUrl(): string | undefined {
-  const url = import.meta.env.VITE_BACKEND_URL as string | undefined;
+  const url = import.meta.env['VITE_BACKEND_URL'] as string | undefined;
   return url ? url.replace(/\/$/, "") : undefined;
 }
 

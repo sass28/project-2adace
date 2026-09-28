@@ -51,7 +51,7 @@ export function LineSeries({ data, series, height = 200, unit = "", domain }: { 
       <LineChart data={data} margin={{ top: 8, right: 4, left: -18, bottom: 0 }}>
         <CartesianGrid vertical={false} stroke="var(--border)" />
         <XAxis dataKey="t" tick={tick} tickLine={false} axisLine={false} tickFormatter={fmtTime} minTickGap={40} />
-        <YAxis tick={tick} tickLine={false} axisLine={false} width={48} domain={domain} />
+        <YAxis tick={tick} tickLine={false} axisLine={false} width={48} {...(domain ? { domain } : {})} />
         <Tooltip content={<GlassTooltip unit={unit} />} />
         {series.map((s) => <Line key={s.key} type="monotone" dataKey={s.key} name={s.name} stroke={s.color} strokeWidth={2} dot={false} animationDuration={700} />)}
       </LineChart>

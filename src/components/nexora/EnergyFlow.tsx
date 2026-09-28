@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const W = 800, H = 440;
 const N = { solar: [130, 90], grid: [130, 350], hub: [400, 220], battery: [670, 90], loads: [670, 350] } as const;
 
-function path(a: readonly number[], b: readonly number[]) {
+function path(a: readonly [number, number], b: readonly [number, number]) {
   const mx = (a[0] + b[0]) / 2;
   return `M${a[0]} ${a[1]} C ${mx} ${a[1]}, ${mx} ${b[1]}, ${b[0]} ${b[1]}`;
 }
@@ -27,7 +27,7 @@ function Flow({ d, color, active, reverse, intensity }: { d: string; color: stri
   );
 }
 
-function Node({ at, icon: Icon, label, color, children, dim }: { at: readonly number[]; icon: typeof Sun; label: string; color: string; children: React.ReactNode; dim?: boolean }) {
+function Node({ at, icon: Icon, label, color, children, dim }: { at: readonly [number, number]; icon: typeof Sun; label: string; color: string; children: React.ReactNode; dim?: boolean }) {
   return (
     <div
       className={cn("glass-3 absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-3 rounded-2xl px-3 py-2.5 transition-opacity md:px-4 md:py-3", dim && "opacity-55")}
