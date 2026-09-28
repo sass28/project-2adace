@@ -85,7 +85,7 @@ export function LoadDrawer({ loadId, onClose }: { loadId: string | null; onClose
 
   return (
     <Sheet open={!!loadId} onOpenChange={(o) => !o && onClose()}>
-      <SheetContent className="glass-4 w-full overflow-y-auto border-l-0 !bg-transparent p-0 sm:max-w-lg">
+      <SheetContent className="glass-4 w-full overflow-y-auto border-l-0 bg-[var(--glass-4)] p-0 sm:max-w-lg">
         {load && (
           <div className="p-6">
             <SheetHeader className="p-0 text-left">
