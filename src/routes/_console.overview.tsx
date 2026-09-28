@@ -4,7 +4,7 @@ import { ArrowUpRight, Brain, ShieldCheck, Thermometer } from "lucide-react";
 import { seo } from "@/lib/seo";
 import { useEnergy } from "@/lib/energy/store";
 import { EnergyFlow } from "@/components/nexora/EnergyFlow";
-import { AnimatedNumber, Power, Ring, Stat, StatusDot, Bar, timeAgo } from "@/components/nexora/primitives";
+import { AnimatedNumber, Power, Ring, Stat, StatusDot, Bar } from "@/components/nexora/primitives";
 import { AreaSeries, ChartPanel } from "@/components/nexora/Charts";
 import { LoadCard, LoadDrawer } from "@/components/nexora/Loads";
 
@@ -121,7 +121,6 @@ function Overview() {
         </section>
       )}
       <LoadDrawer loadId={open} onClose={() => setOpen(null)} />
-      <span className="sr-only">{timeAgo(t.t)}</span>
     </div>
   );
 }
